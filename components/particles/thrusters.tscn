@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=3 uid="uid://cyq3bxq5l8on4"]
+
+[sub_resource type="Curve" id="Curve_3en3q"]
+_data = [Vector2(0, 0), 0.0, 4.97482, 0, 0, Vector2(0.302439, 1), 1.01825e-06, 1.01825e-06, 0, 0, Vector2(0.770732, 1), 0.0866437, 0.0866437, 0, 0, Vector2(1, 0.296703), 0.32314, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_hqc8o"]
+curve = SubResource("Curve_3en3q")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tf3bn"]
+angle_max = 360.0
+direction = Vector3(0, 1, 0)
+spread = 0.0
+initial_velocity_min = 1.0
+initial_velocity_max = 4.0
+angular_velocity_max = 40.0
+gravity = Vector3(0, 0, 0)
+linear_accel_min = 1.0
+linear_accel_max = 8.0
+scale_min = 0.1
+scale_curve = SubResource("CurveTexture_hqc8o")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mph2p"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.890196, 0.298039, 0, 1)
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_100yp"]
+material = SubResource("StandardMaterial3D_mph2p")
+
+[node name="Thrusters" type="GPUParticles3D"]
+amount = 100
+lifetime = 0.82
+process_material = SubResource("ParticleProcessMaterial_tf3bn")
+draw_pass_1 = SubResource("QuadMesh_100yp")
