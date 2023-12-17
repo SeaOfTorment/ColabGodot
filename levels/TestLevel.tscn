@@ -1,20 +1,36 @@
-[gd_scene load_steps=4 format=3 uid="uid://c05kc7ugt8wlf"]
+[gd_scene load_steps=5 format=3 uid="uid://c05kc7ugt8wlf"]
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_35qxy"]
+[ext_resource type="PackedScene" uid="uid://bakd4f0rhom0l" path="res://levels/terrain/map.tscn" id="1_vn88l"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_fqtgm"]
-size = Vector3(10, 0.1, 10)
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ndijx"]
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_bqp7o"]
-size = Vector2(10, 10)
+[sub_resource type="Sky" id="Sky_10nvy"]
+sky_material = SubResource("ProceduralSkyMaterial_ndijx")
+process_mode = 1
+
+[sub_resource type="Environment" id="Environment_atwnm"]
+background_mode = 2
+sky = SubResource("Sky_10nvy")
+tonemap_mode = 3
+sdfgi_use_occlusion = true
+sdfgi_read_sky_light = false
+sdfgi_cascades = 1
+sdfgi_min_cell_size = 0.0488281
+sdfgi_cascade0_distance = 3.125
+sdfgi_max_distance = 6.25
+glow_enabled = true
+adjustment_enabled = true
+adjustment_contrast = 1.12
+adjustment_saturation = 1.18
 
 [node name="TestLevel" type="Node3D"]
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
-physics_material_override = SubResource("PhysicsMaterial_35qxy")
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.5631, 0)
+light_energy = 7.465
+omni_range = 72.327
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-shape = SubResource("BoxShape3D_fqtgm")
+[node name="map" parent="." instance=ExtResource("1_vn88l")]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
-mesh = SubResource("PlaneMesh_bqp7o")
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_atwnm")

@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://bakd4f0rhom0l"]
+
+[ext_resource type="PackedScene" uid="uid://ktx4obh7yh68" path="res://levels/terrain/map.glb" id="1_1bxqy"]
+[ext_resource type="Shader" uid="uid://dch8qxqx0ifc4" path="res://shaders/TestLevel.tres" id="2_1fxo0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hrgoq"]
+render_priority = 0
+shader = ExtResource("2_1fxo0")
+
+[node name="map" instance=ExtResource("1_1bxqy")]
+
+[node name="plane" parent="." index="0"]
+transform = Transform3D(164.891, 0, 0, 0, 164.891, 0, 0, 0, 164.891, 0, 13.1785, 0)
+surface_material_override/0 = SubResource("ShaderMaterial_hrgoq")

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bqh0y0qlgfh3n"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_p4d00"]
+
+[node name="ThrustersParticles" type="CPUParticles3D"]
+mesh = SubResource("QuadMesh_p4d00")

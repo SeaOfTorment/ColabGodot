@@ -1,0 +1,29 @@
+[gd_scene load_steps=8 format=3 uid="uid://hps2dtonga4d"]
+
+[ext_resource type="PackedScene" uid="uid://d01c56m0my6xe" path="res://components/ship/ship.glb" id="1_ccmpt"]
+[ext_resource type="Shader" uid="uid://uxwym2m6lb2k" path="res://shaders/ship_wings.tres" id="2_2y7em"]
+[ext_resource type="Shader" uid="uid://c6525nrg0oylf" path="res://shaders/ship_cockpit.tres" id="2_r33fu"]
+[ext_resource type="Shader" uid="uid://ciods2336wfb7" path="res://shaders/ship_thrusters.tres" id="4_2x7sj"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gbpsk"]
+render_priority = 0
+shader = ExtResource("2_2y7em")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pivjk"]
+render_priority = 0
+shader = ExtResource("2_r33fu")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_la23u"]
+render_priority = 0
+shader = ExtResource("4_2x7sj")
+
+[node name="ship" instance=ExtResource("1_ccmpt")]
+
+[node name="Cube" parent="." index="0"]
+surface_material_override/0 = SubResource("ShaderMaterial_gbpsk")
+
+[node name="Cube_001" parent="." index="1"]
+surface_material_override/0 = SubResource("ShaderMaterial_pivjk")
+
+[node name="Cylinder" parent="." index="2"]
+surface_material_override/0 = SubResource("ShaderMaterial_la23u")
