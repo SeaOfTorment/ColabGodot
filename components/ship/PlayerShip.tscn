@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://c44lbxfmw8rg5"]
 
-[ext_resource type="PackedScene" uid="uid://o0sy1b05ommc" path="res://components/ship/ship.tscn" id="1_qlmva"]
+[ext_resource type="PackedScene" uid="uid://hps2dtonga4d" path="res://components/ship/ship.tscn" id="1_qlmva"]
 [ext_resource type="Script" path="res://components/ship/Ship.gd" id="1_x7h4f"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_i5qa4"]

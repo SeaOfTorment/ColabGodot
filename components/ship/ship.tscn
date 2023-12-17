@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-[gd_scene load_steps=9 format=3 uid="uid://hps2dtonga4d"]
-=======
 [gd_scene load_steps=8 format=3 uid="uid://o0sy1b05ommc"]
->>>>>>> 10ade89b1d3210a63319f64eff743c76adaa700a
 
 [ext_resource type="PackedScene" uid="uid://c6ofr5pxi3y17" path="res://components/ship/ship.glb" id="1_ccmpt"]
 [ext_resource type="Shader" uid="uid://uxwym2m6lb2k" path="res://shaders/ship_wings.tres" id="2_2y7em"]
