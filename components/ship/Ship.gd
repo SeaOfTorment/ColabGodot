@@ -8,6 +8,8 @@ const SIDE = Vector3(1, 0, 0)
 
 const BASIS = Basis()
 
+const BULLET = preload("res://components/bullet/Bullet.tscn")
+
 var turn_speed = 0.75
 var pitch_speed = 0.5
 var level_speed = 3.0
@@ -21,8 +23,14 @@ var turn_input = 0.0
 var pitch_input = 0.0
 
 var look_dir: Vector2 # Input direction for look/aim
+var looking_back = false
 
 @onready var ship = $ship
+@onready var camera = $Camera3D
+@onready var bulletGroup = $BulletGroup
+@onready var bulletSpawn = $Marker3D
+
+var mouse_pos: Vector2
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -36,10 +44,36 @@ func update_input(delta):
 	if Input.is_action_pressed("throttle_down"):
 		target_speed = max(forward_speed - throttle_delta * delta, MIN_SPEED)
 	
+	if Input.is_action_pressed("flip_camera"):
+		looking_back = true
+		camera.rotation.y = PI
+		camera.position.z = -5
+	else:
+		looking_back = false
+		camera.rotation.y = 0
+		camera.position.z = 5
+	
+	if Input.is_action_pressed("shoot"):
+		var to = camera.project_ray_normal(mouse_pos) * 100
+		if looking_back:
+			to *= -1
+		shoot_bullet(to)
 	#turn_input = Input.get_action_strength("roll_left") - Input.get_action_strength("roll_right")
 	#pitch_input = Input.get_action_strength("pitch_up") - Input.get_action_strength("pitch_down")
-	
 
+
+func shoot_bullet(pos):
+	var bullet = BULLET.instantiate()
+	
+	bullet.position = bulletSpawn.global_position
+	bullet.transform.basis = bullet.transform.basis.looking_at(pos)
+	
+	bulletGroup.add_child(bullet)
+
+
+func _unhandled_input(event):
+	if event is InputEventMouse:
+		mouse_pos = event.position
 
 
 func grab_mouse_direction():
@@ -53,14 +87,13 @@ func grab_mouse_direction():
 		turn_input = -(pos.x + -DEAD_ZONE) / center.x
 	else:
 		turn_input = 0
-		
+	
 	if pos.y < -DEAD_ZONE:
 		pitch_input = -(pos.y - DEAD_ZONE) / center.y
 	elif pos.y > DEAD_ZONE:
 		pitch_input = -(pos.y - DEAD_ZONE) / center.y
 	else:
 		pitch_input = 0
-
 
 
 func _physics_process(delta):
@@ -76,19 +109,6 @@ func _physics_process(delta):
 		forward_speed = min(lerp(forward_speed, target_speed, acceleration * delta), MAX_SPEED)
 	velocity = -transform.basis.z * forward_speed
 	move_and_collide(velocity * delta)
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	# apply gravity
 	
-	# apply lift
-	
-	# plane will move forward
-	# upwards draft if moving forward which cancels out gravity
-	# slowing down will lower draft
-	# thrust will move plane forward
-	# rotation for controlling direction
 
-	pass
 

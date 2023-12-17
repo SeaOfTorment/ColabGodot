@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://c44lbxfmw8rg5"]
 
-[ext_resource type="PackedScene" uid="uid://hps2dtonga4d" path="res://components/ship/ship.tscn" id="1_qlmva"]
+[ext_resource type="PackedScene" uid="uid://o0sy1b05ommc" path="res://components/ship/ship.tscn" id="1_qlmva"]
 [ext_resource type="Script" path="res://components/ship/Ship.gd" id="1_x7h4f"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_i5qa4"]
@@ -12,8 +12,13 @@ script = ExtResource("1_x7h4f")
 [node name="ship" parent="." instance=ExtResource("1_qlmva")]
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.63239, 4.27441)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 1.9, 5)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.748983)
 shape = SubResource("BoxShape3D_i5qa4")
+
+[node name="Marker3D" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.27072)
+
+[node name="BulletGroup" type="Node" parent="."]
