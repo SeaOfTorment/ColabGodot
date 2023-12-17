@@ -1,6 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://hps2dtonga4d"]
+[gd_scene load_steps=8 format=3 uid="uid://o0sy1b05ommc"]
 
-[ext_resource type="PackedScene" uid="uid://d01c56m0my6xe" path="res://components/ship/ship.glb" id="1_ccmpt"]
+[ext_resource type="PackedScene" uid="uid://c6ofr5pxi3y17" path="res://components/ship/ship.glb" id="1_ccmpt"]
 [ext_resource type="Shader" uid="uid://uxwym2m6lb2k" path="res://shaders/ship_wings.tres" id="2_2y7em"]
 [ext_resource type="Shader" uid="uid://c6525nrg0oylf" path="res://shaders/ship_cockpit.tres" id="2_r33fu"]
 [ext_resource type="Shader" uid="uid://ciods2336wfb7" path="res://shaders/ship_thrusters.tres" id="4_2x7sj"]
