@@ -1,0 +1,42 @@
+[gd_scene load_steps=3 format=3 uid="uid://dytmcf4yfjpbb"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gft0e"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_t3n3y"]
+
+[node name="ShipDeath" type="Node3D"]
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+shape = SubResource("BoxShape3D_gft0e")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
+mesh = SubResource("BoxMesh_t3n3y")
+
+[node name="RigidBody3D2" type="RigidBody3D" parent="."]
+transform = Transform3D(0.883308, 0.379411, 0.275345, -0.468793, 0.714892, 0.518809, 0, -0.587347, 0.809335, 0, 0.682645, 1.15279)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D2"]
+shape = SubResource("BoxShape3D_gft0e")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D2"]
+mesh = SubResource("BoxMesh_t3n3y")
+
+[node name="RigidBody3D3" type="RigidBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D3"]
+shape = SubResource("BoxShape3D_gft0e")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D3"]
+transform = Transform3D(0.504949, -0.863149, 0, 0.863149, 0.504949, 0, 0, 0, 1, 1.13273, 1.50332, -0.0785785)
+mesh = SubResource("BoxMesh_t3n3y")
+
+[node name="RigidBody3D4" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.37479, 1.6264, 0.0174248)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D4"]
+shape = SubResource("BoxShape3D_gft0e")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D4"]
+mesh = SubResource("BoxMesh_t3n3y")

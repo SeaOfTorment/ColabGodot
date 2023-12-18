@@ -11,6 +11,20 @@
 [node name="PlayerShip" parent="." instance=ExtResource("2_ly0h3")]
 max_speed = 50.0
 thrust = 30.0
+max_health = 100.0
 
 [node name="PlayerShip2" parent="." instance=ExtResource("3_avdtr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.59207, 29.7593, -31.9821)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 41.7119, 29.7593, -31.9821)
+max_health = 100.0
+
+[node name="EnemyShip" parent="." instance=ExtResource("3_avdtr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -53.4926, 19.8609, -23.6691)
+
+[node name="EnemyShip2" parent="." instance=ExtResource("3_avdtr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -49.1467, 24.8181, 30.6751)
+
+[node name="EnemyShip3" parent="." instance=ExtResource("3_avdtr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 56.3641, 26.7208, 17.1441)
+
+[node name="EnemyShip4" parent="." instance=ExtResource("3_avdtr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -59.8417, 27.8106, 46.1964)

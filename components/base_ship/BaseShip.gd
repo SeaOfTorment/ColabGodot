@@ -1,5 +1,7 @@
 extends CharacterBody3D
 
+var grav: float = ProjectSettings.get_setting("physics/3d/default_gravity") / 10
+
 const FORWARD = Vector3(0, 0, 1)
 const SIDE = Vector3(1, 0, 0)
 
@@ -34,11 +36,14 @@ var dead : bool = false;
 
 const EXPLOSION = preload("res://components/particles/explosion.tscn")
 const BULLET_IMPACT = preload("res://components/particles/bullet_impact.tscn")
+
+const RAG_DOLL = preload("res://components/ragdoll/ShipDeath.tscn")
 @onready var health = max_health
 
 var death_messages = {
 	"terrain": "I died myself!",
 	"bullet": "Died to %s",
+	"plane": "Crashed into %s"
 }
 
 var explosions = {
@@ -65,7 +70,10 @@ func calculate_stats():
 
 
 func damage(dmg, pierce):
+	print("hit!")
 	health -= dmg
+	if health <= 0:
+		die("bullet")
 	
 
 func handle_controls(delta):
@@ -78,6 +86,7 @@ func handle_controls(delta):
 
 
 func explode(explosion_position: Vector3 = Vector3(0,0,0), explosion_type: String = "death"):
+	print(explosions, explosions[explosion_type])
 	var explosion = explosions[explosion_type].instantiate()
 	add_child(explosion)
 	explosion.global_position = explosion_position
@@ -93,16 +102,30 @@ func die(died_to: String, killer: String = ""):
 		print(death_messages[died_to])
 		explode(ship.global_position)
 
+var dead_spawned = false
+
+func spawn_ragdoll(delta):
+	if dead_spawned: 
+		return
+	dead_spawned = true
+	ship.hide()
+	var effects = RAG_DOLL.instantiate();
+	effects.position = global_position
+	get_tree().root.add_child(effects)
+	collisionBox.queue_free()
+	
+
 
 func _physics_process(delta):
+	if dead:
+		spawn_ragdoll(delta)
+		return
 	handle_controls(delta)
 	transform.basis = transform.basis.rotated(transform.basis.x, pitch_input * pitch_speed * delta)
 	transform.basis = transform.basis.rotated(Vector3.UP, turn_input * turn_speed * delta)
 	ship.rotation.z = turn_input
 	ship.rotation.x = pitch_input / 10
-	
-	collisionBox.rotation.z = turn_input
-	collisionBox.rotation.x = pitch_input / 10
+	collisionBox.rotation = ship.rotation
 	
 	forward_speed = min(lerp(forward_speed, target_speed, acceleration * delta), max_speed)
 	velocity = -transform.basis.z * forward_speed
@@ -111,6 +134,11 @@ func _physics_process(delta):
 	var collision = move_and_collide(velocity * delta)
 	
 	if collision && !dead:
+		var source = collision.get_collider(0)
+		if source.has_method("die"):
+			source.die("plane", "Me")
+			die("plane", "You")
+			return
 		var hit: String = "terrain" #collision.get_collider().get_meta("id")
 		if hit == "terrain":
 			die(hit) #collided with, (optional) from who

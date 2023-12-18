@@ -21,6 +21,9 @@ mesh = SubResource("BoxMesh_4o4jq")
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("2_bxktr")
 volume_db = -9.369
+max_db = 2.0
 max_distance = 4096.0
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
