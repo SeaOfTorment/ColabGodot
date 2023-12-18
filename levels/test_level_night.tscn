@@ -50,5 +50,5 @@ environment = SubResource("Environment_r21d8")
 transform = Transform3D(0.837989, 0.193444, -0.510249, -0.0754878, 0.967162, 0.242692, 0.540441, -0.164856, 0.825074, 0, 0, 0)
 light_energy = 0.188
 shadow_enabled = true
-shadow_opacity = 0.48
+shadow_opacity = 0.33
 shadow_blur = 10.0
