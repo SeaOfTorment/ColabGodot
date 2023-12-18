@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://rn10uub15opy"]
+
+[ext_resource type="Script" path="res://components/base_weapon/Weapon.gd" id="1_1qdvy"]
+[ext_resource type="PackedScene" uid="uid://y13djaxtpqs4" path="res://components/bullet/Bullet.tscn" id="2_cqsjq"]
+
+[node name="StandardGun" type="Node3D" node_paths=PackedStringArray("bulletSpawn", "bulletGroup")]
+script = ExtResource("1_1qdvy")
+BULLET = ExtResource("2_cqsjq")
+bulletSpawn = NodePath("Marker3D")
+bulletGroup = NodePath("BulletBank")
+
+[node name="Marker3D" type="Marker3D" parent="."]
+
+[node name="BulletBank" type="Node" parent="."]

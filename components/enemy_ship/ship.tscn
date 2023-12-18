@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://chy0v7uyh3y54"]
 
-[ext_resource type="PackedScene" uid="uid://c6ofr5pxi3y17" path="res://components/ship/ship.glb" id="1_dojhv"]
+[ext_resource type="PackedScene" uid="uid://7m8ofw6gu0y5" path="res://components/enemy_ship/ship.glb" id="1_dojhv"]
 [ext_resource type="Shader" uid="uid://c6525nrg0oylf" path="res://shaders/ship_cockpit.tres" id="3_kfbk1"]
 [ext_resource type="PackedScene" uid="uid://cyq3bxq5l8on4" path="res://components/particles/thrusters.tscn" id="5_eu1eb"]
 

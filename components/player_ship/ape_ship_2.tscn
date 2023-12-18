@@ -1,33 +1,33 @@
-[gd_scene load_steps=29 format=3 uid="uid://dwlhkbmkf763h"]
+[gd_scene load_steps=29 format=3 uid="uid://by63efn7povit"]
 
-[ext_resource type="PackedScene" uid="uid://cnr3vl7y1gusb" path="res://components/ship/ape_ship2.glb" id="1_gqkpv"]
-[ext_resource type="Shader" uid="uid://dbv2ueysno62x" path="res://shaders/ship_metal.tres" id="2_jgigp"]
-[ext_resource type="PackedScene" uid="uid://cyq3bxq5l8on4" path="res://components/particles/thrusters.tscn" id="2_td4hf"]
-[ext_resource type="Material" uid="uid://bgtfaxpiyp4x3" path="res://shaders/ape_ship_2_glow.tres" id="3_no5pv"]
+[ext_resource type="PackedScene" uid="uid://cnr3vl7y1gusb" path="res://components/player_ship/ape_ship2.glb" id="1_rx8vm"]
+[ext_resource type="Shader" uid="uid://dbv2ueysno62x" path="res://shaders/ship_metal.tres" id="2_7c30r"]
+[ext_resource type="Material" uid="uid://bgtfaxpiyp4x3" path="res://shaders/ape_ship_2_glow.tres" id="3_uiq52"]
+[ext_resource type="PackedScene" uid="uid://cyq3bxq5l8on4" path="res://components/particles/thrusters.tscn" id="4_ogi4t"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_j7uhu"]
 render_priority = 0
-shader = ExtResource("2_jgigp")
+shader = ExtResource("2_7c30r")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kg3aw"]
 render_priority = 0
-shader = ExtResource("2_jgigp")
+shader = ExtResource("2_7c30r")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_d3w4m"]
 render_priority = 0
-shader = ExtResource("2_jgigp")
+shader = ExtResource("2_7c30r")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_f1hpn"]
 render_priority = 0
-shader = ExtResource("2_jgigp")
+shader = ExtResource("2_7c30r")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_edx2j"]
 render_priority = 0
-shader = ExtResource("2_jgigp")
+shader = ExtResource("2_7c30r")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7c4n4"]
 render_priority = 0
-shader = ExtResource("2_jgigp")
+shader = ExtResource("2_7c30r")
 
 [sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_2hfoe"]
 operator = 2
@@ -167,7 +167,7 @@ nodes/fragment/connections = PackedInt32Array(2, 0, 3, 0, 3, 0, 4, 0, 3, 0, 5, 0
 render_priority = 0
 shader = SubResource("VisualShader_6pt4s")
 
-[node name="ape_ship2" instance=ExtResource("1_gqkpv")]
+[node name="ape_ship2" instance=ExtResource("1_rx8vm")]
 
 [node name="Cube" parent="." index="0"]
 material_override = SubResource("ShaderMaterial_j7uhu")
@@ -189,9 +189,9 @@ material_override = SubResource("ShaderMaterial_7c4n4")
 
 [node name="Cube_006" parent="." index="6"]
 transform = Transform3D(0.239656, 0, 0, 0, 0.239656, 0, 0, 0, 1.44004, 0, 0.00209918, -0.567597)
-material_override = ExtResource("3_no5pv")
+material_override = ExtResource("3_uiq52")
 
-[node name="Thrusters" parent="Cube_006" index="0" instance=ExtResource("2_td4hf")]
+[node name="Thrusters" parent="Cube_006" index="0" instance=ExtResource("4_ogi4t")]
 transform = Transform3D(0.7, 0, 0, 0, -3.0598e-08, -0.129, 0, 0.7, -5.63877e-09, -1.56254, -0.138935, 1.59045)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Cube_006/Thrusters" index="0"]
@@ -200,7 +200,7 @@ light_color = Color(1, 0.717647, 0, 1)
 light_energy = 0.5
 omni_range = 3.0
 
-[node name="Thrusters2" parent="Cube_006" index="1" instance=ExtResource("2_td4hf")]
+[node name="Thrusters2" parent="Cube_006" index="1" instance=ExtResource("4_ogi4t")]
 transform = Transform3D(0.7, 0, 0, 0, -3.0598e-08, -0.129, 0, 0.7, -5.63877e-09, 1.563, -0.139, 1.59)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Cube_006/Thrusters2" index="0"]

@@ -8,10 +8,8 @@ const MAX_TIME = 5
 var count = 0
 
 # stats
-var damage = 10
-var armor_pierce = 2
-
-
+@export var damage = 10
+@export var armor_pierce = 2
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -33,5 +31,5 @@ func _physics_process(delta):
 
 
 func _on_body_entered(body):
-	$"../../".explode(global_position, "bullet_impact")
+	#$"../../".explode(global_position, "bullet_impact")
 	queue_free()

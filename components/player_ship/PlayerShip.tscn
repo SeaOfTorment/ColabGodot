@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://dknj0vltixypg"]
+
+[ext_resource type="Script" path="res://components/base_ship/BaseShip.gd" id="2_bbsxp"]
+[ext_resource type="PackedScene" uid="uid://by63efn7povit" path="res://components/player_ship/ape_ship_2.tscn" id="2_cywyo"]
+[ext_resource type="Script" path="res://components/player_ship/PlayerShip.gd" id="3_60y6x"]
+[ext_resource type="PackedScene" uid="uid://rn10uub15opy" path="res://components/standard_gun/StandardGun.tscn" id="4_7vcvf"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_e2m0v"]
+size = Vector3(5, 0.75, 3)
+
+[node name="PlayerShip" type="CharacterBody3D" node_paths=PackedStringArray("ship", "collisionBox", "weapon")]
+script = ExtResource("2_bbsxp")
+ship = NodePath("ape_ship2")
+collisionBox = NodePath("CollisionShape3D")
+weapon = NodePath("StandardGun")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.39436, 5.00522)
+
+[node name="ape_ship2" parent="." instance=ExtResource("2_cywyo")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.218887, 0)
+shape = SubResource("BoxShape3D_e2m0v")
+
+[node name="Controller" type="Node3D" parent="."]
+script = ExtResource("3_60y6x")
+
+[node name="StandardGun" parent="." instance=ExtResource("4_7vcvf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.89731)
+cooldown = 0.05
