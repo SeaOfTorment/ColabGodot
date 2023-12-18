@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://bg32l78ixgnwo"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vd3a2"]
+emission_shape_scale = Vector3(0, 0, 0)
+direction = Vector3(0, 0, 0)
+spread = 0.0
+gravity = Vector3(0, 0, 0)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_v5are"]
+
+[node name="Trail" type="GPUParticles3D"]
+amount = 4
+lifetime = 25.0
+interpolate = false
+trail_enabled = true
+trail_lifetime = 25.0
+process_material = SubResource("ParticleProcessMaterial_vd3a2")
+draw_pass_1 = SubResource("PlaneMesh_v5are")

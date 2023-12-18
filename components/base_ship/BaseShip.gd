@@ -32,8 +32,8 @@ var turn_input = 0.0
 var pitch_input = 0.0
 var dead : bool = false;
 
-@onready var EXPLOSION = preload("res://components/particles/explosion.tscn")
-@onready var BULLET_IMPACT = preload("res://components/particles/bullet_impact.tscn")
+const EXPLOSION = preload("res://components/particles/explosion.tscn")
+const BULLET_IMPACT = preload("res://components/particles/bullet_impact.tscn")
 @onready var health = max_health
 
 var death_messages = {
