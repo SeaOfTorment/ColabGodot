@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://depw1ifw2ckuv"]
+[gd_scene load_steps=11 format=3 uid="uid://depw1ifw2ckuv"]
 
 [ext_resource type="Texture2D" uid="uid://b5805ao7px4fx" path="res://components/particles/textures/bullet_impact/dust.png" id="1_axtqp"]
+[ext_resource type="Script" path="res://components/particles/free_particle.gd" id="2_oinx6"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8qy5p"]
 transparency = 1
@@ -54,3 +55,6 @@ lifetime = 0.4
 one_shot = true
 process_material = SubResource("ParticleProcessMaterial_1qtiw")
 draw_pass_1 = SubResource("QuadMesh_ecb2q")
+script = ExtResource("2_oinx6")
+
+[connection signal="finished" from="." to="." method="queue_free"]

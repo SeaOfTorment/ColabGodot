@@ -13,7 +13,7 @@ script = ExtResource("1_68tf4")
 ship = NodePath("ship")
 collisionBox = NodePath("CollisionShape3D")
 weapon = NodePath("StandardGun")
-thrust = 30.0
+thrust = 60.0
 
 [node name="ship" parent="." instance=ExtResource("2_sr7ec")]
 
