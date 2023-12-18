@@ -19,15 +19,17 @@ func _unhandled_input(event):
 		mouse_pos = event.position
 
 
+func check_input(action):
+	if Input.is_action_pressed(action):
+		ship_controller.input[action] = true
+	else:
+		ship_controller.input[action] = false
+
 func handle_input():
-	if Input.is_action_pressed("throttle_up"):
-		ship_controller.input["throttle_up"] = true
-	else:
-		ship_controller.input["throttle_up"] = false
-	if Input.is_action_pressed("throttle_down"):
-		ship_controller.input["throttle_down"] = true
-	else:
-		ship_controller.input["throttle_down"] = false
+	check_input("throttle_up")
+	check_input("throttle_down")
+	check_input("roll_left")
+	check_input("roll_right")
 	
 	if Input.is_action_pressed("flip_camera"):
 		print(get_child_count())

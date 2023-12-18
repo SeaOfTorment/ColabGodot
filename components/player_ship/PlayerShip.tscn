@@ -15,7 +15,7 @@ collisionBox = NodePath("CollisionShape3D")
 weapon = NodePath("StandardGun")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.39436, 5.00522)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 1, 5.005)
 
 [node name="ape_ship2" parent="." instance=ExtResource("2_cywyo")]
 

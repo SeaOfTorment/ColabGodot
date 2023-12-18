@@ -32,6 +32,10 @@ var target_speed = 0.0
 
 var turn_input = 0.0
 var pitch_input = 0.0
+var roll = 1.0
+var roll_delta = 0
+const ROLL_MAX_TIME = 2.0
+const ROLL_SPEED = 4.0
 var dead : bool = false;
 
 const EXPLOSION = preload("res://components/particles/explosion.tscn")
@@ -54,6 +58,8 @@ var explosions = {
 var input = {
 	"throttle_up": false,
 	"throttle_down": false,
+	"roll_right": false,
+	"roll_left": false,
 	"shoot": false,
 }
 
@@ -74,13 +80,21 @@ func damage(dmg, pierce):
 	health -= dmg
 	if health <= 0:
 		die("bullet")
-	
+
+
 
 func handle_controls(delta):
 	if input["throttle_up"]:
 		target_speed = min(forward_speed + throttle_delta * delta, max_speed)
 	if input["throttle_down"]:
 		target_speed = max(forward_speed - throttle_delta * delta, min_speed)
+
+	if not input["roll_right"] and not input["roll_left"]:
+		roll_delta -= delta * ROLL_SPEED
+		roll_delta = max(roll_delta, 0)
+	else:
+		roll_delta += delta * ROLL_SPEED
+		roll_delta = min(roll_delta, ROLL_MAX_TIME)
 	if input["shoot"]:
 		weapon.shoot_bullet(global_position + velocity * 100)
 
@@ -115,15 +129,21 @@ func spawn_ragdoll(delta):
 	collisionBox.queue_free()
 	
 
+func constrain_input():
+	turn_input = max(min(turn_input, 1), -1)
+	pitch_input = max(min(pitch_input, 1), -1)
+
 
 func _physics_process(delta):
 	if dead:
 		spawn_ragdoll(delta)
 		return
 	handle_controls(delta)
+	constrain_input()
+	
 	transform.basis = transform.basis.rotated(transform.basis.x, pitch_input * pitch_speed * delta)
-	transform.basis = transform.basis.rotated(Vector3.UP, turn_input * turn_speed * delta)
-	ship.rotation.z = turn_input
+	transform.basis = transform.basis.rotated(Vector3.UP, (turn_input * (1 + (roll * (roll_delta / ROLL_MAX_TIME)))) * turn_speed * delta)
+	ship.rotation.z = turn_input * (1 + (roll * (roll_delta / ROLL_MAX_TIME)))
 	ship.rotation.x = pitch_input / 10
 	collisionBox.rotation = ship.rotation
 	
