@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://c1l38jx0qehd8"]
+[gd_scene load_steps=6 format=3 uid="uid://c1l38jx0qehd8"]
 
 [ext_resource type="PackedScene" uid="uid://c05kc7ugt8wlf" path="res://levels/TestLevel.tscn" id="1_evqbd"]
 [ext_resource type="Texture2D" uid="uid://doc4ofbjge2iq" path="res://levels/skys/kloppenheim_02_puresky_4k.hdr" id="2_jyux5"]
-[ext_resource type="PackedScene" uid="uid://dwlhkbmkf763h" path="res://components/ship/ape_ship_2.tscn" id="3_jrehw"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_4dufg"]
 panorama = ExtResource("2_jyux5")
@@ -53,6 +52,3 @@ light_energy = 0.188
 shadow_enabled = true
 shadow_opacity = 0.48
 shadow_blur = 10.0
-
-[node name="ape_ship2" parent="." index="3" instance=ExtResource("3_jrehw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.0981, -1.42797, 7.06121)

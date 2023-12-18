@@ -198,7 +198,7 @@ transform = Transform3D(0.7, 0, 0, 0, -3.0598e-08, -0.129, 0, 0.7, -5.63877e-09,
 transform = Transform3D(5.96093, 0, 0, 0, 0.992036, 2.53344e-07, 0, 1.42109e-14, 32.3461, 0, 0.400485, -1.19209e-07)
 light_color = Color(1, 0.717647, 0, 1)
 light_energy = 0.5
-omni_range = 1.206
+omni_range = 3.0
 
 [node name="Thrusters2" parent="Cube_006" index="1" instance=ExtResource("2_td4hf")]
 transform = Transform3D(0.7, 0, 0, 0, -3.0598e-08, -0.129, 0, 0.7, -5.63877e-09, 1.563, -0.139, 1.59)
@@ -207,7 +207,7 @@ transform = Transform3D(0.7, 0, 0, 0, -3.0598e-08, -0.129, 0, 0.7, -5.63877e-09,
 transform = Transform3D(5.96093, 0, 0, 0, 0.992036, 2.53344e-07, 0, 1.42109e-14, 32.3461, 0, 0.400485, -1.19209e-07)
 light_color = Color(1, 0.717647, 0, 1)
 light_energy = 0.5
-omni_range = 1.206
+omni_range = 3.0
 
 [node name="Cube_007" parent="." index="7"]
 material_override = SubResource("ShaderMaterial_7alfl")
