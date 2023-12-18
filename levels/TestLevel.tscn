@@ -1,43 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://c05kc7ugt8wlf"]
+[gd_scene load_steps=2 format=3 uid="uid://c05kc7ugt8wlf"]
 
 [ext_resource type="PackedScene" uid="uid://bakd4f0rhom0l" path="res://levels/terrain/map.tscn" id="1_vn88l"]
-
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ndijx"]
-sky_top_color = Color(0.384314, 0.454902, 0.54902, 1)
-ground_bottom_color = Color(0.384314, 0.454902, 0.54902, 1)
-
-[sub_resource type="Sky" id="Sky_10nvy"]
-sky_material = SubResource("ProceduralSkyMaterial_ndijx")
-process_mode = 1
-
-[sub_resource type="Environment" id="Environment_atwnm"]
-background_mode = 2
-sky = SubResource("Sky_10nvy")
-tonemap_mode = 3
-sdfgi_use_occlusion = true
-sdfgi_read_sky_light = false
-sdfgi_cascades = 1
-sdfgi_min_cell_size = 0.0488281
-sdfgi_cascade0_distance = 3.125
-sdfgi_max_distance = 6.25
-glow_enabled = true
-glow_intensity = 1.36
-glow_strength = 1.2
-glow_bloom = 0.16
-adjustment_enabled = true
-adjustment_contrast = 1.12
-adjustment_saturation = 1.18
 
 [node name="TestLevel" type="Node3D"]
 
 [node name="map" parent="." instance=ExtResource("1_vn88l")]
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_atwnm")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.985036, -0.0187398, 0.171328, -0.0392234, 0.943611, 0.328724, -0.167827, -0.330525, 0.928756, 0, 0, 0)
-light_energy = 0.8
-shadow_enabled = true
-shadow_opacity = 0.65
-shadow_blur = 4.188

@@ -21,7 +21,9 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
-	var velocity = -transform.basis.z * 100 * delta
+	var velocity = -transform.basis.z * 200 * delta
+	var space = get_viewport().world_3d.direct_space_state
+	position += velocity
 	
 	position += velocity
 	position.y -= grav * (count / 5)
@@ -31,7 +33,5 @@ func _physics_process(delta):
 
 
 func _on_body_entered(body):
-
+	$"../../".explode(global_position, "bullet_impact")
 	queue_free()
-
-	pass # Replace with function body.

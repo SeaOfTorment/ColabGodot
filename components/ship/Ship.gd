@@ -9,7 +9,8 @@ const SIDE = Vector3(1, 0, 0)
 const BASIS = Basis()
 
 const BULLET = preload("res://components/bullet/Bullet.tscn")
-
+const EXPLOSION = preload("res://components/particles/explosion.tscn")
+const BULLET_IMPACT = preload("res://components/particles/bullet_impact.tscn")
 var turn_speed = 0.75
 var pitch_speed = 0.5
 var level_speed = 3.0
@@ -25,13 +26,23 @@ var pitch_input = 0.0
 var look_dir: Vector2 # Input direction for look/aim
 var looking_back = false
 
-@onready var ship = $ship
+@onready var ship = $ape_ship2
 @onready var camera = $Camera3D
 @onready var bulletGroup = $BulletGroup
 @onready var bulletSpawn = $Marker3D
 @onready var collisionShape = $CollisionShape3D
 
 var mouse_pos: Vector2
+
+var dead:bool = false;
+var death_messages = {
+	"terrain" : "I died myself!",
+	"bullet"  : "Died to %s",
+}
+var explosions = {
+	"death" : EXPLOSION,
+	"bullet_impact" : BULLET_IMPACT,
+}
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -49,6 +60,7 @@ func update_input(delta):
 		target_speed = max(forward_speed - throttle_delta * delta, MIN_SPEED)
 	
 	if Input.is_action_pressed("flip_camera"):
+		print(get_child_count())
 		looking_back = true
 		camera.rotation.y = PI
 		camera.position.z = -5
@@ -101,7 +113,21 @@ func grab_mouse_direction():
 	else:
 		pitch_input = 0
 
-
+func explode(explosion_position: Vector3 = Vector3(0,0,0), explosion_type: String = "death"):
+	var explosion = explosions[explosion_type].instantiate()
+	add_child(explosion)
+	explosion.global_position = explosion_position
+	explosion.emitting = true
+	
+func die(died_to: String, killer: String = ""):
+	dead = true
+	if !killer.is_empty():
+		print(death_messages[died_to] % killer)
+		explode(ship.global_position)
+	else:
+		print(death_messages[died_to])
+		explode(ship.global_position)
+	
 func _physics_process(delta):
 	grab_mouse_direction()
 	update_input(delta)
@@ -117,7 +143,12 @@ func _physics_process(delta):
 	else:
 		forward_speed = min(lerp(forward_speed, target_speed, acceleration * delta), MAX_SPEED)
 	velocity = -transform.basis.z * forward_speed
-	move_and_collide(velocity * delta)
 	
-
-
+	# Sea - added collision & death
+	var collision = move_and_collide(velocity * delta)
+	if collision && !dead:
+		var hit: String = collision.get_collider().get_meta("id")
+		if hit == "terrain":
+			die(hit) #collided with, (optional) from who
+		elif hit == "bullet":
+			pass
