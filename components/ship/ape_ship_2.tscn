@@ -1,0 +1,213 @@
+[gd_scene load_steps=29 format=3 uid="uid://dwlhkbmkf763h"]
+
+[ext_resource type="PackedScene" uid="uid://cnr3vl7y1gusb" path="res://components/ship/ape_ship2.glb" id="1_gqkpv"]
+[ext_resource type="Shader" uid="uid://dbv2ueysno62x" path="res://shaders/ship_metal.tres" id="2_jgigp"]
+[ext_resource type="PackedScene" uid="uid://cyq3bxq5l8on4" path="res://components/particles/thrusters.tscn" id="2_td4hf"]
+[ext_resource type="Material" uid="uid://bgtfaxpiyp4x3" path="res://shaders/ape_ship_2_glow.tres" id="3_no5pv"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j7uhu"]
+render_priority = 0
+shader = ExtResource("2_jgigp")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kg3aw"]
+render_priority = 0
+shader = ExtResource("2_jgigp")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d3w4m"]
+render_priority = 0
+shader = ExtResource("2_jgigp")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f1hpn"]
+render_priority = 0
+shader = ExtResource("2_jgigp")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_edx2j"]
+render_priority = 0
+shader = ExtResource("2_jgigp")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7c4n4"]
+render_priority = 0
+shader = ExtResource("2_jgigp")
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_2hfoe"]
+operator = 2
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_8nap7"]
+operator = 2
+
+[sub_resource type="VisualShaderNodeVec3Constant" id="VisualShaderNodeVec3Constant_qk2aj"]
+constant = Vector3(1, 1, 1)
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_77lri"]
+input_name = "uv"
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_5q5xk"]
+default_input_values = [0, Vector3(0, 0, 0), 1, Vector3(2, 2, 2)]
+operator = 2
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_sf1v6"]
+load_path = "res://.godot/imported/Metal iron 1_baseColor.jpeg-d5c9cad4d87e1f9eaddac28b4fa789f9.s3tc.ctex"
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_a4km1"]
+texture = SubResource("CompressedTexture2D_sf1v6")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_c6ljw"]
+load_path = "res://.godot/imported/Metal iron 1_roughness.jpeg-7e115bd8e737587726df5a32beeea3af.s3tc.ctex"
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_sguyf"]
+texture = SubResource("CompressedTexture2D_c6ljw")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_clvdw"]
+load_path = "res://.godot/imported/Metal iron 1_ambientOcclusion.jpeg-7f60436e0753815a774f9bf6da6fad1c.s3tc.ctex"
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_mmosh"]
+texture = SubResource("CompressedTexture2D_clvdw")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_3arur"]
+load_path = "res://.godot/imported/Metal iron 1_metallic.jpeg-b7c08e886f038cb54d20806e5a05dca9.s3tc.ctex"
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_gcvy5"]
+texture = SubResource("CompressedTexture2D_3arur")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_rg2lv"]
+load_path = "res://.godot/imported/Metal iron 1_normal.jpeg-4e5907b74416e96e68322867ce1747d7.s3tc.ctex"
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_yoanq"]
+texture = SubResource("CompressedTexture2D_rg2lv")
+texture_type = 2
+
+[sub_resource type="VisualShaderNodeVec3Constant" id="VisualShaderNodeVec3Constant_d741x"]
+
+[sub_resource type="VisualShader" id="VisualShader_6pt4s"]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx;
+
+uniform sampler2D tex_frg_4;
+uniform sampler2D tex_frg_5;
+uniform sampler2D tex_frg_6;
+uniform sampler2D tex_frg_7;
+uniform sampler2D tex_frg_8 : hint_normal;
+
+
+
+void fragment() {
+// Vector3Constant:9
+	vec3 n_out9p0 = vec3(0.000000, 0.000000, 0.000000);
+
+
+// Input:2
+	vec2 n_out2p0 = UV;
+
+
+// VectorOp:3
+	vec3 n_in3p1 = vec3(2.00000, 2.00000, 2.00000);
+	vec3 n_out3p0 = vec3(n_out2p0, 0.0) * n_in3p1;
+
+
+// Texture2D:4
+	vec4 n_out4p0 = texture(tex_frg_4, vec2(n_out3p0.xy));
+
+
+// VectorOp:10
+	vec3 n_out10p0 = n_out9p0 * vec3(n_out4p0.xyz);
+
+
+// Texture2D:5
+	vec4 n_out5p0 = texture(tex_frg_5, vec2(n_out3p0.xy));
+
+
+// Texture2D:6
+	vec4 n_out6p0 = texture(tex_frg_6, vec2(n_out3p0.xy));
+
+
+// Texture2D:7
+	vec4 n_out7p0 = texture(tex_frg_7, vec2(n_out3p0.xy));
+
+
+// Texture2D:8
+	vec4 n_out8p0 = texture(tex_frg_8, vec2(n_out3p0.xy));
+
+
+// Output:0
+	ALBEDO = n_out10p0;
+	METALLIC = n_out5p0.x;
+	ROUGHNESS = n_out6p0.x;
+	SPECULAR = n_out7p0.x;
+	NORMAL_MAP = vec3(n_out8p0.xyz);
+
+
+}
+"
+graph_offset = Vector2(-376.164, -272.625)
+nodes/fragment/2/node = SubResource("VisualShaderNodeInput_77lri")
+nodes/fragment/2/position = Vector2(-500, 280)
+nodes/fragment/3/node = SubResource("VisualShaderNodeVectorOp_5q5xk")
+nodes/fragment/3/position = Vector2(-200, 280)
+nodes/fragment/4/node = SubResource("VisualShaderNodeTexture_a4km1")
+nodes/fragment/4/position = Vector2(120, 140)
+nodes/fragment/5/node = SubResource("VisualShaderNodeTexture_sguyf")
+nodes/fragment/5/position = Vector2(120, 360)
+nodes/fragment/6/node = SubResource("VisualShaderNodeTexture_mmosh")
+nodes/fragment/6/position = Vector2(120, 600)
+nodes/fragment/7/node = SubResource("VisualShaderNodeTexture_gcvy5")
+nodes/fragment/7/position = Vector2(120, 840)
+nodes/fragment/8/node = SubResource("VisualShaderNodeTexture_yoanq")
+nodes/fragment/8/position = Vector2(120, 1100)
+nodes/fragment/9/node = SubResource("VisualShaderNodeVec3Constant_d741x")
+nodes/fragment/9/position = Vector2(-460, 0)
+nodes/fragment/10/node = SubResource("VisualShaderNodeVectorOp_2hfoe")
+nodes/fragment/10/position = Vector2(-60, -40)
+nodes/fragment/11/node = SubResource("VisualShaderNodeVectorOp_8nap7")
+nodes/fragment/11/position = Vector2(-100, 120)
+nodes/fragment/12/node = SubResource("VisualShaderNodeVec3Constant_qk2aj")
+nodes/fragment/12/position = Vector2(-440, 140)
+nodes/fragment/connections = PackedInt32Array(2, 0, 3, 0, 3, 0, 4, 0, 3, 0, 5, 0, 3, 0, 6, 0, 3, 0, 7, 0, 3, 0, 8, 0, 5, 0, 0, 2, 6, 0, 0, 3, 7, 0, 0, 4, 8, 0, 0, 9, 4, 0, 10, 1, 9, 0, 10, 0, 10, 0, 0, 0, 12, 0, 11, 0, 4, 0, 11, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7alfl"]
+render_priority = 0
+shader = SubResource("VisualShader_6pt4s")
+
+[node name="ape_ship2" instance=ExtResource("1_gqkpv")]
+
+[node name="Cube" parent="." index="0"]
+material_override = SubResource("ShaderMaterial_j7uhu")
+
+[node name="Cube_001" parent="." index="1"]
+material_override = SubResource("ShaderMaterial_kg3aw")
+
+[node name="Cube_002" parent="." index="2"]
+material_override = SubResource("ShaderMaterial_d3w4m")
+
+[node name="Cube_003" parent="." index="3"]
+material_override = SubResource("ShaderMaterial_f1hpn")
+
+[node name="Cube_004" parent="." index="4"]
+material_override = SubResource("ShaderMaterial_edx2j")
+
+[node name="Cube_005" parent="." index="5"]
+material_override = SubResource("ShaderMaterial_7c4n4")
+
+[node name="Cube_006" parent="." index="6"]
+transform = Transform3D(0.239656, 0, 0, 0, 0.239656, 0, 0, 0, 1.44004, 0, 0.00209918, -0.599524)
+material_override = ExtResource("3_no5pv")
+
+[node name="Thrusters" parent="Cube_006" index="0" instance=ExtResource("2_td4hf")]
+transform = Transform3D(0.7, 0, 0, 0, -3.0598e-08, -0.129, 0, 0.7, -5.63877e-09, -1.56254, -0.138935, 1.59045)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Cube_006/Thrusters" index="0"]
+transform = Transform3D(5.96093, 0, 0, 0, 0.992036, 2.53344e-07, 0, 1.42109e-14, 32.3461, 0, 0.400485, -1.19209e-07)
+light_color = Color(1, 0.717647, 0, 1)
+light_energy = 0.5
+omni_range = 1.206
+
+[node name="Thrusters2" parent="Cube_006" index="1" instance=ExtResource("2_td4hf")]
+transform = Transform3D(0.7, 0, 0, 0, -3.0598e-08, -0.129, 0, 0.7, -5.63877e-09, 1.563, -0.139, 1.59)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Cube_006/Thrusters2" index="0"]
+transform = Transform3D(5.96093, 0, 0, 0, 0.992036, 2.53344e-07, 0, 1.42109e-14, 32.3461, 0, 0.400485, -1.19209e-07)
+light_color = Color(1, 0.717647, 0, 1)
+light_energy = 0.5
+omni_range = 1.206
+
+[node name="Cube_007" parent="." index="7"]
+material_override = SubResource("ShaderMaterial_7alfl")

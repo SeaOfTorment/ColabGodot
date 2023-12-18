@@ -12,3 +12,6 @@ shader = ExtResource("2_1fxo0")
 [node name="plane" parent="." index="0"]
 transform = Transform3D(164.891, 0, 0, 0, 164.891, 0, 0, 0, 164.891, 0, 13.1785, 0)
 surface_material_override/0 = SubResource("ShaderMaterial_hrgoq")
+
+[node name="StaticBody3D" parent="plane" index="0"]
+metadata/id = "terrain"
