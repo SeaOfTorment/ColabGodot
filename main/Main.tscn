@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://c05kc7ugt8wlf" path="res://levels/TestLevel.tscn" id="1_r64vm"]
 [ext_resource type="PackedScene" uid="uid://c44lbxfmw8rg5" path="res://components/ship/PlayerShip.tscn" id="3_7l363"]
+[ext_resource type="PackedScene" uid="uid://b2uiit5vlenyy" path="res://components/enemy_ship/EnemyShip.tscn" id="3_avdtr"]
 
 [node name="Main" type="Node3D"]
 
@@ -9,3 +10,6 @@
 
 [node name="PlayerShip" parent="." instance=ExtResource("3_7l363")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.47718, -0.38772, -8.09775)
+
+[node name="PlayerShip2" parent="." instance=ExtResource("3_avdtr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.59207, 29.7593, -31.9821)

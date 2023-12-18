@@ -23,19 +23,24 @@ var turn_input = 0.0
 var pitch_input = 0.0
 
 var look_dir: Vector2 # Input direction for look/aim
-var looking_back = false
 
 @onready var ship = $ship
-@onready var camera = $Camera3D
 @onready var bulletGroup = $BulletGroup
 @onready var bulletSpawn = $Marker3D
 @onready var collisionShape = $CollisionShape3D
 
 var mouse_pos: Vector2
 
+
+var ai_inputs = {
+	"throttle_up": false,
+	"throttle_down": false,
+	"shoot": false,
+	"blink": false
+}
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	
 	pass # Replace with function body.
 
 
@@ -43,32 +48,22 @@ var BULLET_CD = 0.08
 var cd = 0
 
 func update_input(delta):
-	if Input.is_action_pressed("throttle_up"):
+	cd -= delta
+	if ai_inputs.get("throttle_up"):
 		target_speed = min(forward_speed + throttle_delta * delta, MAX_SPEED)
-	if Input.is_action_pressed("throttle_down"):
+	if ai_inputs.get("throttle_down"):
 		target_speed = max(forward_speed - throttle_delta * delta, MIN_SPEED)
 	
-	if Input.is_action_pressed("flip_camera"):
-		looking_back = true
-		camera.rotation.y = PI
-		camera.position.z = -5
-	else:
-		looking_back = false
-		camera.rotation.y = 0
-		camera.position.z = 5
-	
-	cd -= delta
-	if Input.is_action_pressed("shoot") and cd <= 0:
-		cd = BULLET_CD
-		var to = camera.project_ray_normal(mouse_pos) * 100
-		if looking_back:
-			to *= -1
-		shoot_bullet(to)
+	if ai_inputs.get("shoot"):
+		shoot_bullet(global_position + velocity * 100)
 	#turn_input = Input.get_action_strength("roll_left") - Input.get_action_strength("roll_right")
 	#pitch_input = Input.get_action_strength("pitch_up") - Input.get_action_strength("pitch_down")
 
 
 func shoot_bullet(pos):
+	if cd > 0:
+		return
+	cd = BULLET_CD
 	var bullet = BULLET.instantiate()
 	
 	bullet.position = bulletSpawn.global_position
@@ -77,47 +72,64 @@ func shoot_bullet(pos):
 	bulletGroup.add_child(bullet)
 
 
-func _unhandled_input(event):
-	if event is InputEventMouse:
-		mouse_pos = event.position
+
+const RAY_COUNT = 10
+const RAY_LENGTH = 30
+
+# Perform raycasting to detect obstacles
+func perform_raycasting(origin: Vector3) -> Vector3:
+	var max_distance : float = 100.0  # Maximum distance for raycasting
+	var best_direction : Vector3 = Vector3.ZERO
+	var max_collisions : int = -1  # Track the maximum number of collisions
+	var space_state = get_world_3d().direct_space_state
+
+	for i in range(RAY_COUNT):
+		# Calculate the direction of the ray
+		# Based on the transform.basis.z vector; vector pointing forward, create a cone of rays
+		var angle = i * (120 / RAY_COUNT)  # Distribute rays evenly in a circle
+		var direction = transform.basis.rotated(transform.basis.z, angle)
+		# Cast the ray
+		var query = PhysicsRayQueryParameters3D.create(origin, origin - direction.z * RAY_LENGTH)
+		var collision = space_state.intersect_ray(query)
 
 
-func grab_mouse_direction():
-	var viewport = get_viewport()
-	var center = viewport.get_visible_rect().size / 2
-	var pos = get_viewport().get_mouse_position() - center
+		# Check for collisions
+		if collision:
+			# Count the number of collisions
+			
+			print(collision)
+
+	return best_direction.normalized()
+
+
+var target_point = Vector3.ZERO
+
+
+func run_ai(delta):
+	ai_inputs["throttle_up"] = true
 	
-	if pos.x > DEAD_ZONE:
-		turn_input = -(pos.x - DEAD_ZONE) / center.x
-	elif pos.x < -DEAD_ZONE:
-		turn_input = -(pos.x + -DEAD_ZONE) / center.x
-	else:
-		turn_input = 0
+	turn_input = 0.3
 	
-	if pos.y < -DEAD_ZONE:
-		pitch_input = -(pos.y - DEAD_ZONE) / center.y
-	elif pos.y > DEAD_ZONE:
-		pitch_input = -(pos.y - DEAD_ZONE) / center.y
-	else:
-		pitch_input = 0
+	var dir = perform_raycasting(global_position)
+	ai_inputs["shoot"] = true
+	pass
 
 
 func _physics_process(delta):
-	grab_mouse_direction()
+	run_ai(delta)
 	update_input(delta)
 	transform.basis = transform.basis.rotated(transform.basis.x, pitch_input * pitch_speed * delta)
 	transform.basis = transform.basis.rotated(Vector3.UP, turn_input * turn_speed * delta)
 	ship.rotation.z = turn_input
 	ship.rotation.x = pitch_input / 10
-	
 	collisionShape.rotation.z = turn_input
 	collisionShape.rotation.x = pitch_input / 10
-	if Input.is_action_just_pressed("blink"):
+	
+	if ai_inputs.get("blink"):
 		forward_speed = 3000.0
 	else:
 		forward_speed = min(lerp(forward_speed, target_speed, acceleration * delta), MAX_SPEED)
 	velocity = -transform.basis.z * forward_speed
-	move_and_collide(velocity * delta)
-	
 
+	move_and_collide(velocity * delta)
 
