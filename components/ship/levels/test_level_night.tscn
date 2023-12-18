@@ -1,0 +1,58 @@
+[gd_scene load_steps=7 format=3 uid="uid://c1l38jx0qehd8"]
+
+[ext_resource type="PackedScene" uid="uid://c05kc7ugt8wlf" path="res://components/ship/levels/TestLevel.tscn" id="1_evqbd"]
+[ext_resource type="Texture2D" uid="uid://doc4ofbjge2iq" path="res://components/ship/levels/skys/kloppenheim_02_puresky_4k.hdr" id="2_jyux5"]
+[ext_resource type="PackedScene" uid="uid://dwlhkbmkf763h" path="res://components/ship/ape_ship_2.tscn" id="3_jrehw"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_4dufg"]
+panorama = ExtResource("2_jyux5")
+filter = false
+
+[sub_resource type="Sky" id="Sky_dtnst"]
+sky_material = SubResource("PanoramaSkyMaterial_4dufg")
+process_mode = 1
+
+[sub_resource type="Environment" id="Environment_r21d8"]
+background_mode = 2
+background_energy_multiplier = 0.07
+sky = SubResource("Sky_dtnst")
+ambient_light_source = 3
+ambient_light_color = Color(0.168627, 0.611765, 0.972549, 1)
+ambient_light_sky_contribution = 0.91
+ambient_light_energy = 1.12
+reflected_light_source = 2
+tonemap_mode = 3
+ssr_enabled = true
+sdfgi_use_occlusion = true
+sdfgi_cascades = 1
+sdfgi_min_cell_size = 0.0488281
+sdfgi_cascade0_distance = 3.125
+sdfgi_max_distance = 6.25
+glow_enabled = true
+glow_normalized = true
+glow_intensity = 2.05
+glow_strength = 0.68
+glow_bloom = 0.41
+glow_blend_mode = 1
+volumetric_fog_density = 0.014
+volumetric_fog_albedo = Color(0.145098, 0.145098, 0.145098, 1)
+volumetric_fog_length = 19.8
+volumetric_fog_sky_affect = 0.225
+adjustment_enabled = true
+adjustment_contrast = 1.12
+adjustment_saturation = 1.18
+
+[node name="TestLevel" instance=ExtResource("1_evqbd")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." index="1"]
+environment = SubResource("Environment_r21d8")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." index="2"]
+transform = Transform3D(0.837989, 0.193444, -0.510249, -0.0754878, 0.967162, 0.242692, 0.540441, -0.164856, 0.825074, 0, 0, 0)
+light_energy = 0.188
+shadow_enabled = true
+shadow_opacity = 0.48
+shadow_blur = 10.0
+
+[node name="ape_ship2" parent="." index="3" instance=ExtResource("3_jrehw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.0981, -1.42797, 7.06121)

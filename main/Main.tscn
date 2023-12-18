@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://dhm1gn8n6k34y"]
 
-[ext_resource type="PackedScene" uid="uid://c1l38jx0qehd8" path="res://levels/test_level_night.tscn" id="1_c4xgf"]
+[ext_resource type="PackedScene" uid="uid://c1l38jx0qehd8" path="res://components/ship/levels/test_level_night.tscn" id="1_c4xgf"]
 [ext_resource type="PackedScene" uid="uid://c44lbxfmw8rg5" path="res://components/ship/PlayerShip.tscn" id="3_7l363"]
 [ext_resource type="PackedScene" uid="uid://b2uiit5vlenyy" path="res://components/enemy_ship/EnemyShip.tscn" id="3_avdtr"]
 
