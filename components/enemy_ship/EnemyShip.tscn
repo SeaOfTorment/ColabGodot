@@ -1,15 +1,13 @@
 [gd_scene load_steps=4 format=3 uid="uid://b2uiit5vlenyy"]
 
 [ext_resource type="Script" path="res://components/enemy_ship/EnemyShip.gd" id="1_rwgv2"]
-[ext_resource type="PackedScene" uid="uid://o0sy1b05ommc" path="res://components/ship/ship.tscn" id="2_5m6s0"]
+[ext_resource type="PackedScene" uid="uid://chy0v7uyh3y54" path="res://components/enemy_ship/ship.tscn" id="2_sr7ec"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_i5qa4"]
 size = Vector3(4, 1, 3)
 
 [node name="EnemyShip" type="CharacterBody3D"]
 script = ExtResource("1_rwgv2")
-
-[node name="ship" parent="." instance=ExtResource("2_5m6s0")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.748983)
@@ -23,3 +21,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.27072)
 [node name="Node" type="Node" parent="."]
 
 [node name="RayCast3D" type="RayCast3D" parent="Node"]
+
+[node name="ship" parent="." instance=ExtResource("2_sr7ec")]

@@ -1,13 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://c1l38jx0qehd8"]
+[gd_scene load_steps=5 format=3 uid="uid://c1l38jx0qehd8"]
 
 [ext_resource type="PackedScene" uid="uid://c05kc7ugt8wlf" path="res://levels/TestLevel.tscn" id="1_evqbd"]
-[ext_resource type="Texture2D" uid="uid://8fydf27nmlut" path="res://levels/skys/kloppenheim_02_puresky_8k.hdr" id="2_vrdlx"]
 
-[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_vxt0p"]
-panorama = ExtResource("2_vrdlx")
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_rilou"]
 
 [sub_resource type="Sky" id="Sky_dtnst"]
-sky_material = SubResource("PanoramaSkyMaterial_vxt0p")
+sky_material = SubResource("PhysicalSkyMaterial_rilou")
 process_mode = 1
 
 [sub_resource type="Environment" id="Environment_r21d8"]

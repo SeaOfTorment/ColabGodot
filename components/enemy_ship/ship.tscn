@@ -1,22 +1,16 @@
-[gd_scene load_steps=9 format=3 uid="uid://chy0v7uyh3y54"]
+[gd_scene load_steps=7 format=3 uid="uid://chy0v7uyh3y54"]
 
 [ext_resource type="PackedScene" uid="uid://c6ofr5pxi3y17" path="res://components/ship/ship.glb" id="1_dojhv"]
-[ext_resource type="Shader" uid="uid://uxwym2m6lb2k" path="res://shaders/ship_wings.tres" id="2_21d6c"]
 [ext_resource type="Shader" uid="uid://c6525nrg0oylf" path="res://shaders/ship_cockpit.tres" id="3_kfbk1"]
-[ext_resource type="Shader" uid="uid://ciods2336wfb7" path="res://shaders/ship_thrusters.tres" id="4_me8kt"]
-[ext_resource type="PackedScene" path="res://components/particles/thrusters.tscn" id="5_eu1eb"]
+[ext_resource type="PackedScene" uid="uid://cyq3bxq5l8on4" path="res://components/particles/thrusters.tscn" id="5_eu1eb"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gbpsk"]
-render_priority = 0
-shader = ExtResource("2_21d6c")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pivjk"]
 render_priority = 0
 shader = ExtResource("3_kfbk1")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_la23u"]
-render_priority = 0
-shader = ExtResource("4_me8kt")
 
 [node name="ship" instance=ExtResource("1_dojhv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00799417, -0.00795007, -0.00149679)

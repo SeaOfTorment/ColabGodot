@@ -147,7 +147,7 @@ func _physics_process(delta):
 	# Sea - added collision & death
 	var collision = move_and_collide(velocity * delta)
 	if collision && !dead:
-		var hit: String = collision.get_collider().get_meta("id")
+		var hit: String = "terrain" #collision.get_collider().get_meta("id")
 		if hit == "terrain":
 			die(hit) #collided with, (optional) from who
 		elif hit == "bullet":

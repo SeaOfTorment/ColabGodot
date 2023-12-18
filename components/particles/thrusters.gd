@@ -1,7 +1,7 @@
 extends GPUParticles3D
 
 @onready var ship = $"../../../"
-@onready var camera = ship.find_children("Camera3D")[0]
+
 var positions: Array[Vector3]
 var mouse_pos: Vector2
 # Called when the node enters the scene tree for the first time.
