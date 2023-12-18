@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://c1l38jx0qehd8"]
 
-[ext_resource type="PackedScene" uid="uid://c05kc7ugt8wlf" path="res://components/ship/levels/TestLevel.tscn" id="1_evqbd"]
-[ext_resource type="Texture2D" uid="uid://doc4ofbjge2iq" path="res://components/ship/levels/skys/kloppenheim_02_puresky_4k.hdr" id="2_jyux5"]
+[ext_resource type="PackedScene" uid="uid://c05kc7ugt8wlf" path="res://levels/TestLevel.tscn" id="1_evqbd"]
+[ext_resource type="Texture2D" uid="uid://doc4ofbjge2iq" path="res://levels/skys/kloppenheim_02_puresky_4k.hdr" id="2_jyux5"]
 [ext_resource type="PackedScene" uid="uid://dwlhkbmkf763h" path="res://components/ship/ape_ship_2.tscn" id="3_jrehw"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_4dufg"]
